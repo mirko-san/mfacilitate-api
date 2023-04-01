@@ -9,6 +9,6 @@
     }
   },
   "tasks": {
-    "dev": "deno run --watch -A src/mod.ts"
+    "start": "deno run --watch -A src/mod.ts"
   }
 }

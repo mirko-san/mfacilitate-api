@@ -1,9 +1,9 @@
 # mfacilitate-api
 
-## Develop
+## 使い方
 
 ```
-deno task dev
+deno task start
 ```
 
 See http://localhost:8000/
