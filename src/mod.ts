@@ -1,5 +1,5 @@
-import { createClient } from '@supabase/supabase-js';
-import { Application, Router } from 'oak';
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.11.0';
+import { Application, Router } from 'https://deno.land/x/oak@v12.1.0/mod.ts';
 import { config } from './config.ts';
 
 // https://supabase.com/docs/reference/javascript/initializing
@@ -17,11 +17,25 @@ router
       .select();
     context.response.body = JSON.stringify({ data });
   })
+  .post('/meetings', async (context) => {
+    const body = await context.request.body().value;
+    const r = await supabase
+      .from('meetings')
+      .insert(body);
+    context.response.body = JSON.stringify(r);
+  })
   .get('/themes', async (context) => {
     const { data } = await supabase
       .from('themes')
       .select();
     context.response.body = JSON.stringify({ data });
+  })
+  .post('/themes', async (context) => {
+    const body = await context.request.body().value;
+    const r = await supabase
+      .from('themes')
+      .insert(body);
+    context.response.body = JSON.stringify(r);
   });
 
 const app = new Application();
