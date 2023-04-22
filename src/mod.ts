@@ -12,10 +12,19 @@ router
     context.response.body = 'Hello world!';
   })
   .get('/meetings', async (context) => {
-    const { data } = await supabase
+    // TODO: context.request.url から指定できるようにする
+    const limit = 10;
+    const offset = 0;
+    const { data, count } = await supabase
       .from('meetings')
-      .select();
-    context.response.body = JSON.stringify({ data });
+      .select('*', { count: 'exact' })
+      .range(offset, offset + limit);
+    context.response.body = JSON.stringify({
+      data,
+      limit,
+      offset,
+      count,
+    });
   })
   .post('/meetings', async (context) => {
     const body = await context.request.body().value;
