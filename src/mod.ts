@@ -24,6 +24,19 @@ router
       .insert(body);
     context.response.body = JSON.stringify(r);
   })
+  .get('/meetings/:id', async (context) => {
+    const id = context.params.id;
+    const { data } = await supabase
+      .from('meetings')
+      .select()
+      .eq('meeting_id', id);
+    if (!Array.isArray(data)) {
+      throw new Error('Invalid data.');
+    }
+    context.response.body = JSON.stringify({
+      data: data[0],
+    });
+  })
   .get('/themes', async (context) => {
     const { data } = await supabase
       .from('themes')
