@@ -1,4 +1,4 @@
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.11.0';
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.21.0';
 import { Application, Router } from 'https://deno.land/x/oak@v12.1.0/mod.ts';
 import { config } from './config.ts';
 
